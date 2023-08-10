@@ -7,12 +7,22 @@ const router = new express.Router();
 
 
 
+ /** return list of shopping items:
+  * { items: [
+  { name: "popsicle", price: 1.45 },
+  { name: "cheerios", price: 3.40 }
+]}
+  */
 
-//get /items
 router.get("/", function (req, res) {
-  return res.json(items);
+  return res.json({items: items});
 });
 
+
+/** accept JSON body, add item, and return it:
+ * {name: "popsicle", price: 1.45} =>
+  {added: {name: "popsicle", price: 1.45}}
+ */
 
 router.post("/", function (req, res) {
   const item = {
@@ -25,6 +35,7 @@ router.post("/", function (req, res) {
   return res.json({added: item});
 });
 
+/** return single item: {name: "popsicle", "price": 1.45} */
 
 router.get("/:name", function (req, res) {
   const item = items.find(item => item.name === req.params.name);
@@ -35,6 +46,9 @@ router.get("/:name", function (req, res) {
 
   return res.json(item);
 });
+
+/** accept JSON body, modify item, return it: {name: "new popsicle", price: 2.45} =>
+  {updated: {name: "new popsicle", price: 2.45}} */
 
 router.patch("/:name", function (req, res) {
 
@@ -64,6 +78,9 @@ router.patch("/:name", function (req, res) {
 
 });
 
+
+/** delete item: {message: "Deleted"} */
+
 router.delete("/:name", function (req, res){
 
   const itemIndex = items.findIndex(item => item.name === req.params.name);
@@ -78,6 +95,7 @@ router.delete("/:name", function (req, res){
 
 
 });
+
 
 //post /items
 //get /items/:name
