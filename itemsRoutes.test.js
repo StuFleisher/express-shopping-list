@@ -54,16 +54,19 @@ describe("post '/' ", function () {
     );
   });
 
-  // test("should add record to the database", async function(){
+  test("should add record to the database", async function(){
+    console.log('items', items)
+    console.log('testItem', testItem)
 
-  //   const response = await request(app)
-  //     .post('/items/')
-  //     .send(testItem);
+    const response = await request(app)
+      .post('/items/')
+      .send(testItem);
+      console.log('items', items)
+      console.log('testItem', testItem)
+      expect(items).toContain(testItem);
+//TODO: try toEqual
 
-  //     expect(items).toContain(testItem);
-
-
-  // })
+  })
 });
 
 describe("get '/items/:name' ", function () {
@@ -76,6 +79,7 @@ describe("get '/items/:name' ", function () {
         "name": "popsicle",
         "price": 1.45
       }
+      //TODO: dont need to put quotes around keys in JS.
     );
 
   });
@@ -91,7 +95,7 @@ describe("patch '/items/:name' ", function () {
         "name": "popsicle2",
         "price": 2.45,
       });
-
+//*TODO: test whats likely to be wrong, make PATCH send one or two fields, but not the thrid
     expect(response.statusCode).toEqual(200);
     expect(response.body).toEqual(
       {

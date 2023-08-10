@@ -65,6 +65,7 @@ router.patch("/:name", function (req, res) {
 
   let name = req.body.name;
   let price = req.body.price;
+  //TODO: we are preventing from writing empty string. if name in req.body
   if (name){
     item.name = name
   }
